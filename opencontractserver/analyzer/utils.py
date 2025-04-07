@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import logging
 
-import requests
-
 from opencontractserver.analyzer.models import GremlinEngine
 from opencontractserver.types.dicts import AnalyzerManifest
 from opencontractserver.utils.etl import is_dict_instance_of_typed_dict
+from security import safe_requests
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +14,7 @@ def get_gremlin_manifests(gremlin_id: int) -> list[AnalyzerManifest] | None:
     logger.info("get_gremlin_manifests - Start...")
     try:
         gremlin = GremlinEngine.objects.get(id=gremlin_id)
-        manifest_response = requests.get(gremlin.url + "/api/analyzers")
+        manifest_response = safe_requests.get(gremlin.url + "/api/analyzers")
         # logger.info(f"get_gremlin_manifests - manifest_response: {manifest_response}")
         # logger.info(
         #     f"get_gremlin_manifests - manifest_response content: {manifest_response.content}"

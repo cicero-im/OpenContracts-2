@@ -2,7 +2,6 @@ import json
 import uuid
 
 import jwt
-import requests
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.utils.translation import gettext as _
@@ -10,11 +9,12 @@ from graphql_jwt import exceptions
 
 from config.graphql_auth0_auth.settings import auth0_settings
 from opencontractserver.users.tasks import sync_remote_user
+from security import safe_requests
 
 
 def jwt_auth0_decode(token):
     header = jwt.get_unverified_header(token)
-    jwks = requests.get(
+    jwks = safe_requests.get(
         f"https://{auth0_settings.AUTH0_DOMAIN}/.well-known/jwks.json"
     ).json()
     public_key = None

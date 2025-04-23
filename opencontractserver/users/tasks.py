@@ -39,7 +39,7 @@ if settings.USE_AUTH0:
         }
         # print(f"Machine-2-Machine Request data: {data}")
 
-        response = requests.post(url, headers=headers, json=data)
+        response = requests.post(url, headers=headers, json=data, timeout=60)
 
         # print("Auth0 Response:")
         # print(response.status_code)
@@ -163,5 +163,5 @@ if settings.USE_AUTH0:
             "Authorization": f"Bearer {token}",
         }
         url = f"https://{auth0_settings.AUTH0_DOMAIN}/api/v2/users/{auth0_Id}"
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=60)
         return json.loads(response.text)

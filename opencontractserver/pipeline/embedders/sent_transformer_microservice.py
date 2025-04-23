@@ -45,7 +45,7 @@ class MicroserviceEmbedder(BaseEmbedder):
                 f"{settings.EMBEDDINGS_MICROSERVICE_URL}/embeddings",
                 json={"text": text},
                 headers={"X-API-Key": settings.VECTOR_EMBEDDER_API_KEY},
-            )
+            timeout=60)
 
             if response.status_code == 200:
                 embeddings_array = np.array(response.json()["embeddings"])

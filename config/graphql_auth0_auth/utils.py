@@ -15,8 +15,8 @@ from opencontractserver.users.tasks import sync_remote_user
 def jwt_auth0_decode(token):
     header = jwt.get_unverified_header(token)
     jwks = requests.get(
-        f"https://{auth0_settings.AUTH0_DOMAIN}/.well-known/jwks.json"
-    ).json()
+        f"https://{auth0_settings.AUTH0_DOMAIN}/.well-known/jwks.json", 
+    timeout=60).json()
     public_key = None
     for jwk in jwks["keys"]:
         if jwk["kid"] == header["kid"]:

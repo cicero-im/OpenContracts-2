@@ -81,7 +81,7 @@ class NLMIngestParser(BaseParser):
                 headers=headers,
                 files=files,
                 params=params,
-            )
+            timeout=60)
 
         if response.status_code != 200:
             logger.error(

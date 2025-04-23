@@ -15,7 +15,7 @@ def get_gremlin_manifests(gremlin_id: int) -> list[AnalyzerManifest] | None:
     logger.info("get_gremlin_manifests - Start...")
     try:
         gremlin = GremlinEngine.objects.get(id=gremlin_id)
-        manifest_response = requests.get(gremlin.url + "/api/analyzers")
+        manifest_response = requests.get(gremlin.url + "/api/analyzers", timeout=60)
         # logger.info(f"get_gremlin_manifests - manifest_response: {manifest_response}")
         # logger.info(
         #     f"get_gremlin_manifests - manifest_response content: {manifest_response.content}"

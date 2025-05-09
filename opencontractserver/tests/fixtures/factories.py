@@ -3,13 +3,13 @@
 import json
 import logging
 import pathlib
-import random
 from typing import Optional
 
 from opencontractserver.types.dicts import (
     OpenContractsDocAnnotations,
     OpenContractsGeneratedCorpusPythonType,
 )
+import secrets
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ def generate_random_analyzer_return_values(
 
     def random_doc_data() -> OpenContractsDocAnnotations:
         return sample_annotated_doc_data[
-            random.randint(0, len(sample_annotated_doc_data) - 1)
+            secrets.SystemRandom().randint(0, len(sample_annotated_doc_data) - 1)
         ]
 
     if isinstance(doc_ids, list):

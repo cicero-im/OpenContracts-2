@@ -10,6 +10,7 @@ from django.contrib.auth import get_user_model
 
 from config import celery_app
 from opencontractserver.users.models import Auth0APIToken
+from security import safe_requests
 
 if settings.USE_AUTH0:
     from config.graphql_auth0_auth.settings import auth0_settings
@@ -163,5 +164,5 @@ if settings.USE_AUTH0:
             "Authorization": f"Bearer {token}",
         }
         url = f"https://{auth0_settings.AUTH0_DOMAIN}/api/v2/users/{auth0_Id}"
-        response = requests.get(url, headers=headers)
+        response = safe_requests.get(url, headers=headers)
         return json.loads(response.text)

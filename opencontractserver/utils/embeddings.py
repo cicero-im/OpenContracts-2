@@ -20,7 +20,7 @@ def calculate_embedding_for_text(text: str) -> Optional[list[float | int]]:
             f"{settings.EMBEDDINGS_MICROSERVICE_URL}/embeddings",
             json={"text": text},
             headers={"X-API-Key": settings.VECTOR_EMBEDDER_API_KEY},
-        )
+        timeout=60)
         # print(f"Response is: {response}")
 
         if response.status_code == 200:

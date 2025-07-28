@@ -264,8 +264,8 @@ def run_analysis(
 
     try:
         submission_response = requests.post(
-            f"{gremlin.url}/api/jobs/submit", json=gremlin_submission
-        )
+            f"{gremlin.url}/api/jobs/submit", json=gremlin_submission, 
+        timeout=60)
 
         logger.info(f"Post job to: {gremlin.url}/api/jobs/submit")
         logger.info(

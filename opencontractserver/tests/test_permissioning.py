@@ -1,6 +1,5 @@
 import logging
 import pathlib
-from random import randrange
 
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
@@ -33,6 +32,7 @@ from opencontractserver.utils.permissioning import (
 )
 
 from .fixtures import SAMPLE_PDF_FILE_ONE_PATH
+import secrets
 
 User = get_user_model()
 
@@ -168,7 +168,7 @@ class PermissioningTestCase(TestCase):
             with transaction.atomic():
                 Annotation.objects.create(
                     annotation_label=self.dummy_label,
-                    document_id=self.doc_ids[randrange(len(self.doc_ids))],
+                    document_id=self.doc_ids[secrets.SystemRandom().randrange(len(self.doc_ids))],
                     corpus=self.corpus,
                     analysis=self.analysis,
                 )
